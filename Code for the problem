@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char song[1000];
+    int len;
+    int i;
+    int j;
+    int lettercount;
+    
+    /* Below I have taken a string input using gets function */
+    gets(song); 
+    len = strlen(song);
+
+    /* this is to count the no. of letters in the song and then named it as lettercount */
+    for (i=0,j=0;i<len;i++){
+        if (( song[i]>=65 && song[i]<=90 ) || ( song[i]>=97 && song[i]<=122 )) j++;
+        else;
+    }
+
+    lettercount = j;
+    char letter[lettercount];
+
+    /* here I have extracted the letters into a new string called letter with size lettercount */
+    for(i=0,j=0;i<len;i++){
+        if (( song[i]>=65 && song[i]<=90 ) || ( song[i]>=97 && song[i]<=122 )) {
+            letter[j]= song[i];
+            j++;
+        }
+        else;
+
+    }
+
+    /* Converted all uppercase letters to lowercase letters as of Timon's idea */
+    for (i=0;i<lettercount;i++){
+        if ( letter[i]>=65 && letter[i]<=90 ) letter[i]=letter[i] + 32;
+        else;
+    }
+
+    /* printed Timon's modified song */
+    for (i=0;i<lettercount;i++){
+        printf("%c",letter[i]);
+    }
+
+    /* converted letters to Uppercase which were adjacent to a vowel */
+    for (i=0;i<lettercount;i++) {
+
+        if(i==0) {if (letter[i+1]=='a' || letter[i+1]=='e' || letter[i+1]=='i' || letter[i+1]=='o' || letter[i+1]=='u' || letter[i+1]=='A' || letter[i+1]=='E' || letter[i+1]=='I' || letter[i+1]=='O' || letter[i+1]=='U' ) letter[i]= letter[i] - 32;
+                  else; }
+        else if(i==lettercount - 1) {if (letter[i-1]=='a' || letter[i-1]=='e' || letter[i-1]=='i' || letter[i-1]=='o' || letter[i-1]=='u' || letter[i-1]=='A' || letter[i-1]=='E' || letter[i-1]=='I' || letter[i-1]=='O' || letter[i-1]=='U' ) letter[i]= letter[i] - 32;
+                  else; }
+
+        else {
+                  if ( letter[i+1]=='a' || letter[i+1]=='e' || letter[i+1]=='i' || letter[i+1]=='o' || letter[i+1]=='u' || letter[i+1]=='A' || letter[i+1]=='E' || letter[i+1]=='I' || letter[i+1]=='O' || letter[i+1]=='U' || letter[i-1]=='a' || letter[i-1]=='e' || letter[i-1]=='i' || letter[i-1]=='o' || letter[i-1]=='u' || letter[i-1]=='A' || letter[i-1]=='E' || letter[i-1]=='I' || letter[i-1]=='O' || letter[i-1]=='U' ) letter[i] = letter[i] - 32;
+                  else;
+        }          
+
+    }
+
+    char consonant[1000];
+    int consonantcount;
+
+    /* Seperated consonants in a new string after the upper stated comment's treatment */
+    for (i=0,consonantcount=0; i<lettercount;i++) {
+        if (letter[i]=='a' || letter[i]=='e' || letter[i]=='i' || letter[i]=='o' || letter[i]=='u' || letter[i]=='A' || letter[i]=='E' || letter[i]=='I' || letter[i]=='O' || letter[i]=='U' ) {}
+        else {
+            consonant[consonantcount]=letter[i];
+            consonantcount++;
+        }
+    }
+
+    /* printed a new line and printed Pumbaa's modified song */
+    printf("\n");
+
+    for (i=0;i<consonantcount;i++){
+        printf("%c",consonant[i]);
+    }
+
+
+    return 0;
+}
